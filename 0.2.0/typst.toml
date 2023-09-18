@@ -3,5 +3,5 @@ name        = "common"
 version     = "0.2.0"
 entrypoint  = "src/lib.typ"
 authors     = ["George Miao <gm@miao.dev>"]
-license     = "Unlicense"
+license     = "MIT"
 description = "George Miao's Common Typst Lib"
