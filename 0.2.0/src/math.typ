@@ -15,8 +15,8 @@
 #let at(body) = { math.lr($#body #h(0.1em) |$) }
 
 /* Alias, consts */
-#let nec = symbol("□")        // Modal logic neccessity
-#let pos = symbol("♢")        // Modal logic possibility
+#let nec = symbol("□") // Modal logic neccessity
+#let pos = symbol("♢") // Modal logic possibility
 
 #let lcm = { math.op("lcm") } // Least common multiplier
 
