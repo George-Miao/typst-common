@@ -26,13 +26,13 @@
     }),
   )
 
-  set text(font: "XCharter", lang: "en", size: 12pt)
+  set text(font: "XCharter", lang: "en", size: 11pt)
 
   /* Title page. */
   // The page can contain a logo if you pass one with `logo: "logo.png"`.
   v(0.6fr)
 
-  // if_then_lb(logo, x => align(right, image(x, width: 26%)))
+  // if_then_ln(logo, x => align(right, image(x, width: 26%)))
 
   v(8.6fr)
 
@@ -113,6 +113,7 @@
 
 #let sheet(
   title: "",
+  subtitle: "",
   author: "",
   course: "",
   date: today(),
@@ -135,15 +136,18 @@
     margin: 1in
   )
   set document(author: author, title: title)
-  set text(font: "XCharter", lang: "en", size: 12pt)
+  set text(font: "XCharter", lang: "en", size: 11pt)
   set block(breakable: true)
 
   // Header
   stack[
     #set block(spacing: .7em);
-    #if_then_lb(date, x => text(0.7em, x))
-    #if_then_lb(title, x => text(1.4em, weight: 700, x))
-    #if_then_lb(author, x => text(0.95em, style: "italic", x))
+    #if_then(author, x => text(1.1em, weight: 800, x))
+    #h(1fr)
+    #if_then(title, x => text(1.1em, weight: 800, x))\
+    #if_then(date, x => text(0.8em, style: "italic", x))
+    #h(1fr)
+    #if_then(subtitle, x => text(0.8em, style: "italic", x))\
     #v(1em)
   ]
 
@@ -175,4 +179,4 @@
   if newline { linebreak(); }
   [_proof_.]; h(.5em); body; h(1fr); $square$
 }
-
+#let proof_ln = proof.with(newline: true)

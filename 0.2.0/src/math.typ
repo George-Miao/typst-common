@@ -1,3 +1,5 @@
+#import "util.typ": if_then
+
 /* Util Functions */
 #let pmod(e) = [ $(mod #e)$ ] // (P)arenthesis (Mod)ulo
 #let con(l, r, p, inline: false) = { // Congruence
@@ -37,3 +39,6 @@
 // Logic
 #let vd = sym.tack.r
 #let vD = sym.tack.r.double
+#let iff = sym.arrow.l.r.double.long
+#let implies = sym.arrow.r.double.long
+

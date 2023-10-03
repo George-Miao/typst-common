@@ -28,13 +28,19 @@
   place(auto, float: true, block(width: 0em, height: height))
 }
 
+#let falsy(x) = {
+  if is.n(x) { return true } // Test for none
+  if is.empty(x) { return true } // Test for empty string/array
+  false
+}
+
 #let if_then(input, func) = {
-  if input != "" and input != none {
+  if not falsy(input) {
     func(input)
   }
 }
 
-#let if_then_lb(input, func) = {
+#let if_then_ln(input, func) = {
   if_then(input, x => [#func(x)\ ])
 }
 
