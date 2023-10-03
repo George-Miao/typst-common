@@ -13,6 +13,8 @@
 } // A tuple surrounded by angle brackets
 #let ve(body) = { $accent(#body, arrow)$ } // Vector variable (accent with arrow)
 #let at(body) = { math.lr($#body #h(0.1em) |$) }
+#let ex(body) = { $exists #body. thick$ }
+#let fa(body) = { $forall #body. thick$ }
 
 /* Alias, consts */
 #let nec = symbol("□") // Modal logic neccessity
@@ -20,10 +22,18 @@
 
 #let lcm = { math.op("lcm") } // Least common multiplier
 
+// Calculus
 #let dx = { $thick d x$ }
 #let dy = { $thick d y$ }
 #let dz = { $thick d z$ }
 #let dt = { $thick d t$ }
 #let du = { $thick d u$ }
 #let int = math.integral
+
+// Set
+#let ss = sym.subset
 #let sse = sym.subset.eq
+
+// Logic
+#let vd = sym.tack.r
+#let vD = sym.tack.r.double
