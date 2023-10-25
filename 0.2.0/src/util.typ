@@ -51,13 +51,13 @@
 ) = {
   let counter = counter(theorem_name)
   return (name: none, body) => {
-    locate(loc => {
-      let ele = query(
-        selector(heading.where(level: level)).before(loc),
-        loc,
-      )
-      ele.first()
-    })
+    // locate(loc => {
+    //   let ele = query(
+    //     selector(heading.where(level: level)).before(loc),
+    //     loc,
+    //   )
+    //   ele.numbering()
+    // })
     if cmy != none {
       let color = cmyk(
         cmy.at(0),
@@ -71,7 +71,8 @@
       )[
         #block(width: 100%, inset: 1em)[
           #text(1em, weight: 700, [#theorem_name])
-          #if_then(name, x => [#h(-2pt) (#x)])
+          #h(1em, weak: false)
+          #if_then(name, x => x)
           #text(1em, weight: 700, [#h(-3pt).])
           #body
         ]

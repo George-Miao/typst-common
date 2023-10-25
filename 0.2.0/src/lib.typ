@@ -25,6 +25,7 @@
       text(0.8em, weight: 300, style: "italic", ele.body)
     }),
   )
+  set math.mat(delim: "[")
 
   set text(font: "XCharter", lang: "en", size: 11pt)
 
@@ -138,6 +139,7 @@
   set document(author: author, title: title)
   set text(font: "XCharter", lang: "en", size: 11pt)
   set block(breakable: true)
+  set math.mat(delim: "[")
 
   // Header
   stack[

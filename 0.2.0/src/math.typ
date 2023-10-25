@@ -1,5 +1,3 @@
-#import "util.typ": if_then
-
 /* Util Functions */
 #let pmod(e) = [ $(mod #e)$ ] // (P)arenthesis (Mod)ulo
 #let con(l, r, p, inline: false) = { // Congruence
@@ -16,13 +14,22 @@
 #let ve(body) = { $accent(#body, arrow)$ } // Vector variable (accent with arrow)
 #let at(body) = { math.lr($#body #h(0.1em) |$) }
 #let ex(body) = { $exists #body. thick$ }
+#let ex1(body) = { $exists! #body. thick$ }
 #let fa(body) = { $forall #body. thick$ }
 
 /* Alias, consts */
 #let nec = symbol("□") // Modal logic neccessity
 #let pos = symbol("♢") // Modal logic possibility
 
+#let xlra = sym.arrow.l.r.long // Long left right arrow
+#let lra = sym.arrow.l.r // Left right arrow
+
 #let lcm = { math.op("lcm") } // Least common multiplier
+#let na = sym.nabla // Nabla
+#let comp = sym.compose // Compiose (circ)
+#let pm = sym.plus.minus // Plus Minus
+
+#let detmat = math.mat.with(delim: "|")
 
 // Calculus
 #let dx = { $thick d x$ }
@@ -41,4 +48,10 @@
 #let vD = sym.tack.r.double
 #let iff = sym.arrow.l.r.double.long
 #let implies = sym.arrow.r.double.long
+#let ni = symbol("⥽",
+  ("l", "⥼"),
+  ("r", "⥽"),
+  ("t", "⥾"),
+  ("b", "⥿")
+) // Necessarily implies
 
