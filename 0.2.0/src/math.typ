@@ -30,6 +30,7 @@
 #let pm = sym.plus.minus // Plus Minus
 
 #let detmat = math.mat.with(delim: "|")
+#let dom = { math.op("dom") } // Domain
 
 // Calculus
 #let dx = { $thick d x$ }
