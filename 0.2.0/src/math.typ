@@ -29,11 +29,14 @@
 
 #let lcm = { math.op("lcm") } // Least common multiplier
 #let na = sym.nabla // Nabla
-#let comp = sym.compose // Compiose (circ)
+#let circ = sym.compose // Compiose (circ)
+#let comp = sym.complement // Complement
 #let pm = sym.plus.minus // Plus Minus
+#let sim = sym.tilde.op // Sim
 
 #let detmat = math.mat.with(delim: "|")
 #let dom = { math.op("dom") } // Domain
+#let Var = { math.op("Var") } // Domain
 
 // Calculus
 #let dx = { $thick d x$ }
@@ -43,6 +46,8 @@
 #let du = { $thick d u$ }
 #let dk = { $thick d k$ }
 #let int = math.integral
+#let iint = math.integral.double
+#let iiint = math.integral.triple
 
 // Set
 #let ss = sym.subset
