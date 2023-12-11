@@ -15,18 +15,15 @@
 }
 // Vector variable (accent with arrow)
 #let ve(body) = { $accent(#body, arrow)$ }
-#let at(body) = { math.lr($#body #h(0.1em) |$, size: 120%) }
+#let at(body) = { math.lr($#h(0em) #body #h(0.1em) |$, size: 120%) }
 #let ex(body) = { $exists #body. thick$ }
 #let ex1(body) = { $exists! #body. thick$ }
 #let fa(body) = { $forall #body. thick$ }
 
 /* Alias, consts */
-#let nec = symbol("□") // Modal logic neccessity
-#let pos = symbol("♢") // Modal logic possibility
-
 #let xlra = sym.arrow.l.r.long // Long left right arrow
 #let lra = sym.arrow.l.r // Left right arrow
-
+#let mapsto = sym.arrow.r.long.bar // Mapsto
 #let lcm = { math.op("lcm") } // Least common multiplier
 #let na = sym.nabla // Nabla
 #let circ = sym.compose // Compiose (circ)
@@ -36,15 +33,23 @@
 
 #let detmat = math.mat.with(delim: "|")
 #let dom = { math.op("dom") } // Domain
-#let Var = { math.op("Var") } // Domain
+#let obj = { math.op("obj") } // Object
+#let Var = { math.op("Var") } // Variance
 
 // Calculus
+#let na = sym.nabla
 #let dx = { $thick d x$ }
 #let dy = { $thick d y$ }
 #let dz = { $thick d z$ }
 #let dt = { $thick d t$ }
 #let du = { $thick d u$ }
+#let dv = { $thick d v$ }
 #let dk = { $thick d k$ }
+#let dA = { $thick d A$ }
+#let dV = { $thick d V$ }
+#let ds = { $thick d s$ }
+#let dphi = { $thick d phi$ }
+#let dtheta = { $thick d theta$ }
 #let int = math.integral
 #let iint = math.integral.double
 #let iiint = math.integral.triple
@@ -54,6 +59,8 @@
 #let sse = sym.subset.eq
 
 // Logic
+#let nec = symbol("□") // Modal logic neccessity
+#let pos = symbol("♢") // Modal logic possibility
 #let vd = sym.tack.r
 #let vD = sym.tack.r.double
 #let iff = sym.arrow.l.r.double.long
@@ -64,4 +71,7 @@
   ("t", "⥾"),
   ("b", "⥿")
 ) // Necessarily implies
+#let asymp = symbol("≍") // Asymptotically equal to
 
+// Category theory
+#let hom = { math.op("Hom") }

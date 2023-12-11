@@ -1,6 +1,25 @@
 #import "math.typ": *
 #import "util.typ": *
 
+#let jp(body) = {
+  set text(
+    font: (
+      "Noto Serif CJK JP",
+      "XCharter",
+    ),
+    lang: "ja",
+    size: 11pt
+  )
+
+  show heading: it => [
+    #v(.5em)
+    #it
+    #v(.4em)
+  ]
+
+  body
+}
+
 #let book(title: "", subtitle: "", authors: (), logo: none, body) = {
   // Set the document's basic properties.
   set document(author: authors.map(a => a.name), title: title)
@@ -27,7 +46,11 @@
   )
   set math.mat(delim: "[")
 
-  set text(font: "XCharter", lang: "en", size: 11pt)
+  set text(
+    font: "XCharter",
+    lang: "en",
+    size: 11pt
+  )
 
   /* Title page. */
   // The page can contain a logo if you pass one with `logo: "logo.png"`.
@@ -137,7 +160,11 @@
     margin: 1in
   )
   set document(author: author, title: title)
-  set text(font: "XCharter", lang: "en", size: 11pt)
+  set text(
+    font: "XCharter",
+    lang: "en",
+    size: 11pt
+  )
   set block(breakable: true)
   set math.mat(delim: "[")
 
@@ -171,7 +198,7 @@
 #let lemma      = new_theorem("Lemma", cmy: (30%, 0%, 10%))
 #let corollary  = new_theorem("Corollary", cmy: (10%, 0%, 50%))
 #let definition = new_theorem("Definition", cmy: (0%, 20%, 40%))
-#let example    = new_theorem("Ex")
+#let example    = new_theorem("Example")
 #let question   = new_theorem("Question")
 #let remark     = new_theorem("Remark")
 #let recall     = new_theorem("Recall")

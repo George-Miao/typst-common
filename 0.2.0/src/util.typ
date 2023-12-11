@@ -4,7 +4,7 @@
   datetime.today().display("[month repr:short] [day padding:none], [year]")
 }
 
-#let centering(body) = { align(alignment.center, body) }
+#let centering(body) = { box(width: 1fr)[ #align(alignment.center, body) ] }
 
 #let tagged(tag, pos: "right", body) = {
   let dir
@@ -47,7 +47,7 @@
 #let new_theorem(
   theorem_name,
   level: 2,
-  cmy: none
+  cmy: none,
 ) = {
   let counter = counter(theorem_name)
   return (name: none, body) => {
@@ -58,6 +58,7 @@
     //   )
     //   ele.numbering()
     // })
+    let dot = if_then(name, x => [.])
     if cmy != none {
       let color = cmyk(
         cmy.at(0),
@@ -65,20 +66,19 @@
         cmy.at(2),
         10%
       )
-      rect(
+      block(
         fill: color.lighten(90%),
-        stroke: (left: 1.8pt + color.darken(20%))
+        stroke: (left: 1.8pt + color.darken(20%)),
+        inset: 1em,
+        width: 100%,
       )[
-        #block(width: 100%, inset: 1em)[
           #text(1em, weight: 700, [#theorem_name])
-          #h(1em, weak: false)
-          #if_then(name, x => x)
-          #text(1em, weight: 700, [#h(-3pt).])
+          #if_then(name, x => [(#x)])
+          #text(1em, weight: 700, [#h(-3pt)#dot])
           #body
-        ]
       ]
     } else {
-      block(width: 100%, inset: 1em)[
+      block(width: 100%, inset: (top: 1em))[
           #text(1em, weight: 700, [#theorem_name])
           #if_then(name, x => [#h(-2pt) (#x)])
           #text(1em, weight: 700, [#h(-3pt).])
@@ -90,3 +90,5 @@
 
 #let pb = pagebreak()
 #let qquad = h(4em)
+#let hfill = h(1fr)
+#let vfill = v(1fr)
