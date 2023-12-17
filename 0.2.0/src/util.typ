@@ -40,6 +40,14 @@
   }
 }
 
+#let if_else(input, t, f) = {
+  if falsy(input) {
+    f(input)
+  } else {
+    t(input)
+  }
+}
+
 #let if_then_ln(input, func) = {
   if_then(input, x => [#func(x)\ ])
 }

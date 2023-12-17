@@ -48,6 +48,7 @@
 #let dA = { $thick d A$ }
 #let dV = { $thick d V$ }
 #let ds = { $thick d s$ }
+#let dvx = { $thick d ve(x)$ }
 #let dphi = { $thick d phi$ }
 #let dtheta = { $thick d theta$ }
 #let int = math.integral
