@@ -8,19 +8,21 @@
       "XCharter",
     ),
     lang: "ja",
-    size: 11pt
+    size: 11pt,
   )
-
-  show heading: it => [
-    #v(.5em)
-    #it
-    #v(.4em)
-  ]
 
   body
 }
 
-#let book(title: "", subtitle: "", authors: (), logo: none, body) = {
+#let book(
+  title: "",
+  subtitle: "",
+  authors: (),
+  logo: none,
+  chapters: true,
+  toc: true,
+  body,
+) = {
   // Set the document's basic properties.
   set document(author: authors.map(a => a.name), title: title)
   set page(
@@ -30,7 +32,9 @@
     header: locate(loc => {
       let page = loc.position().page
       // Skip title page
-      if page == 1 { return }
+      if page == 1 {
+        return
+      }
 
       // Find the first heading on or before the current page
       let ele = query(
@@ -38,8 +42,12 @@
         loc,
       ).rev().find(elem => elem.location().page() <= page)
 
-      if ele == none { return }
-      if ele.location().page() == page { return }
+      if ele == none {
+        return
+      }
+      if ele.location().page() == page {
+        return
+      }
 
       text(0.8em, weight: 300, style: "italic", ele.body)
     }),
@@ -49,7 +57,7 @@
   set text(
     font: "XCharter",
     lang: "en",
-    size: 11pt
+    size: 11pt,
   )
 
   /* Title page. */
@@ -69,70 +77,94 @@
   v(1fr)
 
   // Author information.
-  pad(top: 0.7em, right: 20%, grid(
-    columns: (1fr,) * calc.min(3, authors.len()),
-    gutter: 1em,
-    ..authors.map(author => align(start)[
-      *#author.name* \
-      #author.email
-    ]),
-  ))
+  pad(
+    top: 0.7em,
+    right: 20%,
+    grid(
+      columns: (1fr,) * calc.min(3, authors.len()),
+      gutter: 1em,
+      ..authors.map(author => align(start)[
+        *#author.name* \
+        #author.email
+      ]),
+    ),
+  )
 
   v(2.4fr)
   pagebreak()
 
   /* Table of contents */
   show outline: x => {
-    show v: (v) => {}
-    show outline.entry.where(
-      level: 1
-    ): it => {
+    show v: v => { }
+    show outline.entry.where(level: 1): it => {
       strong(it)
     }
     x
   }
 
-  outline()
+  if toc {
+    outline()
+  }
+
   pagebreak(weak: true)
 
   /* Main body */
   set heading(numbering: (..x) => {
     let nums = x.pos()
     let names = x.named()
-    if nums.len() == 0 { return }
-    if nums.len() == 1 {
+    if nums.len() == 0 {
+      return
+    }
+    if nums.len() == 1 and chapters {
       v(3.5em)
       text(.8em, weight: 800, font: "Charter", [Chapter #nums.at(0)])
       v(.2em)
     } else {
       nums = nums.map(str).join(".")
-      [#nums #h(.5em)]
+      text(.8em, weight: 800, font: "Charter", fill: rgb("444444"), [#nums #h(.5em)])
     }
   })
 
   // Chapter heading
   show heading.where(level: 1): head => {
-    pagebreak(weak: true)
-    text(
-      size: 27pt,
-      weight: 800,
-      par(
-        leading: .4em,
-        justify: false,
-        head
+    if chapters {
+      pagebreak(weak: true)
+      text(
+        size: 27pt,
+        weight: 800,
+        par(
+          leading: .4em,
+          justify: false,
+          head,
+        ),
       )
-    )
-    v(3em)
+      v(3em)
+    } else {
+      text(
+        size: 18pt,
+        weight: 800,
+        par(
+          leading: .4em,
+          justify: false,
+          head,
+        ),
+      )
+    }
   }
 
   show heading.where(level: 2): head => {
-    [#head #v(1em)]
+    head = text(size: 1.3em, head)
+    v(.5em)
+    if chapters {
+      [#head #v(1em)]
+    } else {
+      head
+    }
   }
 
   set par(justify: true)
 
   body
-
 }
 
 #let sheet(
@@ -157,16 +189,20 @@
     numbering: numbering,
     height: height,
     number-align: end,
-    margin: 1in
+    margin: 1in,
   )
   set document(author: author, title: title)
   set text(
     font: "XCharter",
     lang: "en",
-    size: 11pt
+    size: 11pt,
   )
   set block(breakable: true)
   set math.mat(delim: "[")
+
+  if subtitle == "" {
+    subtitle = course
+  }
 
   // Header
   stack[
@@ -194,18 +230,29 @@
   body
 }
 
-#let theorem    = new_theorem("Theorem", cmy: (50%, 10%, 10%))
-#let lemma      = new_theorem("Lemma", cmy: (30%, 0%, 10%))
-#let corollary  = new_theorem("Corollary", cmy: (10%, 0%, 50%))
-#let definition = new_theorem("Definition", cmy: (0%, 20%, 40%))
-#let example    = new_theorem("Example")
-#let question   = new_theorem("Question")
-#let remark     = new_theorem("Remark")
-#let recall     = new_theorem("Recall")
-#let caution    = new_theorem("Caution")
+#let thm_color = (15%, 0%, 50%)
+#let definition = new_theorem("Definition", cmy: (30%, 0%, 20%))
+#let theorem = new_theorem("Theorem", cmy: thm_color)
+#let fact = new_theorem("Fact", cmy: thm_color)
+#let proposition = new_theorem("Proposition", cmy: thm_color)
+#let corollary = new_theorem("Corollary", cmy: thm_color)
+#let lemma = new_theorem("Lemma", cmy: thm_color)
+#let example = new_theorem("Example")
+#let question = new_theorem("Question")
+#let answer = new_theorem("Answer")
+#let remark = new_theorem("Remark")
+#let recall = new_theorem("Recall")
+#let caution = new_theorem("Caution")
+#let claim = new_theorem("Claim")
 
 #let proof(newline: false, body) = {
-  if newline { linebreak(); }
-  [_proof_.]; h(.5em); body; h(1fr); $square$
+  if newline {
+    linebreak()
+  }
+  [_proof_.]
+  h(.5em)
+  body
+  h(1fr)
+  $square$
 }
 #let proof_ln = proof.with(newline: true)
