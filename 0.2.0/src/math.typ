@@ -62,8 +62,11 @@
 #let topo = math.cal($T$) // Topoolgy
 #let base = math.cal($B$) // Basis
 #let neib = math.cal($N$) // Neighborhood basis
+#let lebe = math.cal($S$) // Lebesgue number
 #let sends = sym.arrow.r.long.bar // |-->
 #let dot = math.op(sym.circle.filled.tiny) // Dot
+#let Sect = sym.sect.big // Big intersection
+#let Union = sym.union.big // Big union
 
 #let detmat = math.mat.with(delim: "|")
 #let dom = math.op("dom") // Domain

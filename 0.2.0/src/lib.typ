@@ -236,11 +236,12 @@
 #let fact = new_theorem("Fact", cmy: thm_color)
 #let proposition = new_theorem("Proposition", cmy: thm_color)
 #let corollary = new_theorem("Corollary", cmy: thm_color)
-#let lemma = new_theorem("Lemma", cmy: thm_color)
+#let lemma = new_theorem("Lemma")
 #let example = new_theorem("Example")
 #let question = new_theorem("Question")
 #let answer = new_theorem("Answer")
 #let remark = new_theorem("Remark")
+#let note = new_theorem("Note")
 #let recall = new_theorem("Recall")
 #let caution = new_theorem("Caution")
 #let claim = new_theorem("Claim")
@@ -249,10 +250,12 @@
   if newline {
     linebreak()
   }
-  [_proof_.]
-  h(.5em)
-  body
-  h(1fr)
-  $square$
+  block(inset: (left: 1em))[
+    _proof_.
+    #h(.5em)
+    #body
+    #h(1fr)
+    $square$
+  ]
 }
 #let proof_ln = proof.with(newline: true)
