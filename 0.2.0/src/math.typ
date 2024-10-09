@@ -74,7 +74,6 @@
 #let Var = math.op("Var") // Variance
 
 // Topology
-#let int = math.op("int") // Interior
 #let bd = math.op("Bd") // Boundary
 #let clo = math.overline // Closure
 

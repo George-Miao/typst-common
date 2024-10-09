@@ -14,12 +14,16 @@
   body
 }
 
+#let a(body) = {
+  set text(fill: red)
+  body
+}
+
 #let book(
   title: "",
   subtitle: "",
   authors: (),
   logo: none,
-  chapters: true,
   toc: true,
   body,
 ) = {
@@ -27,12 +31,18 @@
   set document(author: authors.map(a => a.name), title: title)
   set page(
     "us-letter",
-    numbering: "1",
+    numbering: (page, ..nums) => {
+      // Skip the cover page
+      if page > 1 {
+        text(str(page - 1))
+      }
+
+    },
     number-align: end,
     header: locate(loc => {
-      let page = loc.position().page
+      let current = loc.position().page
       // Skip title page
-      if page == 1 {
+      if current == 1 {
         return
       }
 
@@ -40,16 +50,16 @@
       let ele = query(
         selector(heading.where(level: 1)),
         loc,
-      ).rev().find(elem => elem.location().page() <= page)
+      ).rev().find(elem => elem.location().page() <= current)
 
       if ele == none {
         return
       }
-      if ele.location().page() == page {
+      if ele.location().page() == current {
         return
       }
 
-      text(0.8em, weight: 300, style: "italic", ele.body)
+      text(0.9em, weight: 300, style: "italic", ele.body)
     }),
   )
   set math.mat(delim: "[")
@@ -91,78 +101,53 @@
   )
 
   v(2.4fr)
-  pagebreak()
+
+  pb
 
   /* Table of contents */
-  show outline: x => {
-    show v: v => { }
-    show outline.entry.where(level: 1): it => {
-      strong(it)
-    }
-    x
-  }
-
   if toc {
-    outline()
+    show heading: x => block(below: 3em, text(size: 1.3em, x))
+    show outline.entry.where(level: 1): it => text(1.1em, weight: 800, it)
+    outline(target: heading.where(outlined: true))
   }
 
   pagebreak(weak: true)
 
-  /* Main body */
-  set heading(numbering: (..x) => {
-    let nums = x.pos()
-    let names = x.named()
-    if nums.len() == 0 {
-      return
-    }
-    if nums.len() == 1 and chapters {
-      v(3.5em)
-      text(.8em, weight: 800, font: "Charter", [Chapter #nums.at(0)])
-      v(.2em)
-    } else {
-      nums = nums.map(str).join(".")
-      text(.8em, weight: 800, font: "Charter", fill: rgb("444444"), [#nums #h(.5em)])
-    }
-  })
+  set heading(numbering: "1.")
 
   // Chapter heading
   show heading.where(level: 1): head => {
-    if chapters {
-      pagebreak(weak: true)
-      text(
-        size: 27pt,
-        weight: 800,
-        par(
-          leading: .4em,
-          justify: false,
-          head,
-        ),
-      )
-      v(3em)
-    } else {
-      text(
-        size: 18pt,
-        weight: 800,
-        par(
-          leading: .4em,
-          justify: false,
-          head,
-        ),
-      )
-    }
+    let (chapter, ..) = counter(heading).get()
+    pagebreak(weak: true)
+
+    // Chapter number
+    v(3.5em)
+    text(.8em, weight: 800, font: "Charter", fill: rgb("#525252"), [Chapter #chapter])
+    v(-1em)
+
+    // Chapter title
+    text(
+      size: 27pt,
+      weight: 800,
+      par(
+        leading: .4em,
+        justify: false,
+        head.body,
+      ),
+    )
+    v(3em)
   }
 
   show heading.where(level: 2): head => {
-    head = text(size: 1.3em, head)
-    v(.5em)
-    if chapters {
-      [#head #v(1em)]
-    } else {
-      head
-    }
+    let num = text(fill: rgb("#525252"), counter(heading).get().map(str).join("."))
+
+    block(above: 1.4em, below: 2em)[
+      #num #h(.5em) #text(size: 1.3em, [#head.body])
+    ]
   }
 
   set par(justify: true)
+
 
   body
 }
