@@ -221,7 +221,7 @@
 #let fact = new_theorem("Fact", cmy: thm_color)
 #let proposition = new_theorem("Proposition", cmy: thm_color)
 #let corollary = new_theorem("Corollary", cmy: thm_color)
-#let lemma = new_theorem("Lemma")
+#let lemma = new_theorem("Lemma", cmy: thm_color)
 #let example = new_theorem("Example")
 #let question = new_theorem("Question")
 #let answer = new_theorem("Answer")
@@ -244,3 +244,5 @@
   ]
 }
 #let proof_ln = proof.with(newline: true)
+
+#let sub = text.with(fill: rgb("#737373"))

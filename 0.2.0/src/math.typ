@@ -59,15 +59,10 @@
 #let nothing = $text(font: "Fira Sans", nothing)$ // Round empty set
 #let emptyset = nothing // Empty set
 #let power = math.cal($P$) // Power set
-#let topo = math.cal($T$) // Topoolgy
-#let base = math.cal($B$) // Basis
-#let neib = math.cal($N$) // Neighborhood basis
-#let lebe = math.cal($S$) // Lebesgue number
 #let sends = sym.arrow.r.long.bar // |-->
 #let dot = math.op(sym.circle.filled.tiny) // Dot
 #let Sect = sym.sect.big // Big intersection
 #let Union = sym.union.big // Big union
-
 #let detmat = math.mat.with(delim: "|")
 #let dom = math.op("dom") // Domain
 #let obj = math.op("obj") // Object
@@ -76,6 +71,11 @@
 // Topology
 #let bd = math.op("Bd") // Boundary
 #let clo = math.overline // Closure
+#let topo = math.cal($T$) // Topoolgy
+#let base = math.cal($B$) // Basis
+#let neib = math.cal($N$) // Neighborhood basis
+#let lebe = math.cal($S$) // Lebesgue number
+#let dju = math.op(sym.union.sq) // Disjoint union
 
 // Calculus
 #let na = sym.nabla
