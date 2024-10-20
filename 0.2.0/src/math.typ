@@ -1,5 +1,3 @@
-
-
 /* Util Functions */
 #let pmod(e) = [ $(mod #e)$ ] // (P)arenthesis (Mod)ulo
 #let con(l, r, p, inline: false) = {
@@ -92,9 +90,9 @@
 #let dvx = $thick d ve(x)$
 #let dphi = $thick d phi$
 #let dtheta = $thick d theta$
-#let int = math.integral
-#let iint = math.integral.double
-#let iiint = math.integral.triple
+#let int = sym.integral
+#let iint = sym.integral.double
+#let iiint = sym.integral.triple
 
 // Set
 #let ss = sym.subset
@@ -116,8 +114,5 @@
 ) // Necessarily implies
 #let asymp = symbol("≍") // Asymptotically equal to
 
-
 // Category theory
-#let hom = {
-  math.op("Hom")
-}
+#let hom = math.op("Hom")
