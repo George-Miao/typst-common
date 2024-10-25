@@ -71,7 +71,7 @@
     //     selector(heading.where(level: level)).before(loc),
     //     loc,
     //   )
-    //   ele.numbering()
+    //   ele.
     // })
     let color = if_then(
       cmy,
@@ -84,7 +84,13 @@
     )
     block(
       fill: if_then(color, x => x.lighten(92%)),
-      stroke: if_then(color, x => (left: 1.8pt + x.darken(5%))),
+      stroke: if_then(
+        color,
+        x => (
+          // left: 1.8pt + x.darken(5%),
+          rest: 0.8pt + x.darken(5%),
+        ),
+      ),
       inset: if_else(color, x => (rest: 1em, right: 1.3em), x => 0em),
       width: 100%,
     )[
