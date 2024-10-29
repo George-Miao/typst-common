@@ -63,16 +63,14 @@
   theorem_name,
   level: 2,
   cmy: none,
+  indent: 0pt,
 ) = {
-  let counter = counter(theorem_name)
+  let c = counter(theorem_name)
+  show heading: c.step(level: 1)
   return (name: none, body) => {
-    // locate(loc => {
-    //   let ele = query(
-    //     selector(heading.where(level: level)).before(loc),
-    //     loc,
-    //   )
-    //   ele.
-    // })
+    // let a = context counter(heading).get().at(0)
+    // c.step(level: level)
+    // context c.get()
     let color = if_then(
       cmy,
       cmy => cmyk(

@@ -14,11 +14,6 @@
   body
 }
 
-#let a(body) = {
-  set text(fill: red)
-  body
-}
-
 #let book(
   title: "",
   subtitle: "",
@@ -39,7 +34,8 @@
 
     },
     number-align: end,
-    header: locate(loc => {
+    header: context {
+      let loc = here()
       let current = loc.position().page
       // Skip title page
       if current == 1 {
@@ -48,8 +44,7 @@
 
       // Find the first heading on or before the current page
       let ele = query(
-        selector(heading.where(level: 1)),
-        loc,
+        selector(heading.where(level: 1))
       ).rev().find(elem => elem.location().page() <= current)
 
       if ele == none {
@@ -60,7 +55,8 @@
       }
 
       text(0.9em, weight: 300, style: "italic", ele.body)
-    }),
+
+    },
   )
   set math.mat(delim: "[")
 
@@ -224,7 +220,7 @@
 #let lemma = new_theorem("Lemma", cmy: thm_color)
 #let example = new_theorem("Example")
 #let question = new_theorem("Question")
-#let answer = new_theorem("Answer")
+#let answer = new_theorem("Answer", indent: 1em)
 #let remark = new_theorem("Remark")
 #let note = new_theorem("Note")
 #let recall = new_theorem("Recall")
@@ -235,7 +231,7 @@
   if newline {
     linebreak()
   }
-  block(inset: (left: 1em))[
+  block(inset: (left: 1em, right: .3em))[
     _proof_.
     #h(.5em)
     #body

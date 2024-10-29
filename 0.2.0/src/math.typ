@@ -10,13 +10,14 @@
 }
 
 // A tuple surrounded by angle brackets
-#let tup(..body) = {
+#let an(..body) = {
   let b = body.pos().join([, #h(3pt) ])
 
   [ $angle.l #b angle.r$ ]
 }
 
-#let paren(..body) = {
+// Surrounded by parentheses
+#let pa(..body) = {
   let b = body.pos().join(h(5pt))
 
   [ $(#b)$ ]
