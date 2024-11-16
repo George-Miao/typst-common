@@ -58,6 +58,7 @@
 
     },
   )
+  show math.equation: set block(breakable: true)
   set math.mat(delim: "[")
 
   set text(
@@ -164,6 +165,7 @@
   } else {
     "1"
   }
+  set enum(numbering: "1.a.i.")
   // Set the document's basic properties.
   set page(
     "us-letter",

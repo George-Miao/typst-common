@@ -44,9 +44,7 @@
 #let xlra = sym.arrow.l.r.long // Long left right arrow
 #let lra = sym.arrow.l.r // Left right arrow
 #let mapsto = sym.arrow.r.long.bar // Mapsto
-#let lcm = {
-  math.op("lcm")
-} // Least common multiplier
+#let lcm = math.op("lcm") // Least common multiplier
 #let na = sym.nabla // Nabla
 #let circ = sym.compose // Compiose (circ)
 #let comp = sym.complement // Complement
@@ -66,15 +64,22 @@
 #let dom = math.op("dom") // Domain
 #let obj = math.op("obj") // Object
 #let Var = math.op("Var") // Variance
+#let char = math.op("char") // Characteristic
+#let normal = math.class("binary", sym.lt.tri.eq) // Normal subgroup
 
 // Topology
 #let bd = math.op("Bd") // Boundary
 #let clo = math.overline // Closure
-#let topo = math.cal($T$) // Topoolgy
+#let topo = math.cal($T$) // Topology
 #let base = math.cal($B$) // Basis
 #let neib = math.cal($N$) // Neighborhood basis
 #let lebe = math.cal($S$) // Lebesgue number
 #let dju = math.op(sym.union.sq) // Disjoint union
+#let nbhd = math.op("nbhd")
+#let homeo = math.op("Homeo") // Set of Homeomorphisms
+#let mcg = math.op("MCG") // Mapping class group
+#let bsum = math.class("binary", sym.natural) // Boundary connected sum
+#let csum = math.class("binary", sym.sharp) // Connected sum
 
 // Calculus
 #let na = sym.nabla

@@ -6,8 +6,8 @@
   datetime.today().display("[month repr:short] [day padding:none], [year]")
 }
 
-#let centering(body) = {
-  box(width: 1fr)[ #align(alignment.center, body) ]
+#let centering(body, ..rest) = {
+  box(width: 1fr, ..rest)[ #align(alignment.center, body) ]
 }
 
 #let tagged(tag, pos: "right", body) = {
