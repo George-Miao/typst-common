@@ -80,6 +80,7 @@
 #let mcg = math.op("MCG") // Mapping class group
 #let bsum = math.class("binary", sym.natural) // Boundary connected sum
 #let csum = math.class("binary", sym.sharp) // Connected sum
+#let homo = math.class("binary", sym.tilde.eq) // Homotopy
 
 // Calculus
 #let na = sym.nabla

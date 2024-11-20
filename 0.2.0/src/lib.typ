@@ -182,6 +182,7 @@
   )
   set block(breakable: true)
   set math.mat(delim: "[")
+  show math.equation: set block(breakable: true)
 
   if subtitle == "" {
     subtitle = course
