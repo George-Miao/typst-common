@@ -1,7 +1,13 @@
 #import "@preview/t4t:0.3.2": is
 
 #let inset(body) = block(inset: (x: 1em, y: .3em), body)
-
+#let answer_box(body, ..rest) = box(
+  baseline: 4pt,
+  stroke: 1pt + black,
+  inset: (rest: 3pt, bottom:5pt),
+  ..rest,
+  body,
+)
 #let today() = {
   datetime.today().display("[month repr:short] [day padding:none], [year]")
 }
